@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Covid Tracker{% endblock title %}
+
+{%block content %}
+
+    <div class="container-fluid p-3 mb-2 bg-dark text-white">
+        <h1>Covid Data</h1>
+    <div class=" bg-secondary text-white text-center"><h4>India Statistics</h4></div>
+    </div>
+
+<div class="card-group m-2 max-width">
+
+    <div class="card m-2">
+    <div class="card text-white bg-primary " style="max-width: 18rem">
+        <div class="card-body">
+            <h5 class="card-title">Total Confirmed</h5>
+            {% for c in summary %}
+            <p class="card-text">{{c.total}}</p>
+            
+        </div>
+    </div>
+    </div>
+
+    <div class="card m-2">
+    <div class="card text-white bg-secondary " style="max-width: 18rem">
+        <div class="card-body">
+            <h5 class="card-title">Total Recovered</h5>
+            <p class="card-text">{{c.recovered}}</p>
+        </div>
+    </div>
+    </div>
+
+    <div class="card m-2">
+    <div class="card text-white bg-success " style="max-width: 18rem">
+        <div class="card-body">
+            <h5 class="card-title">Total Deaths</h5>
+            <p class="card-text">{{c.deaths}}</p>
+        </div>
+    </div>
+    </div>
+
+    <div class="card m-2">
+    <div class="card text-white bg-danger " style="max-width: 18rem">
+        <div class="card-body">
+            <h5 class="card-title">Total Active</h5>
+            <p class="card-text">{{c.active}}</p>
+        </div>
+    </div>
+    </div>
+{% endfor %}
+
+</div>
+
+{% comment %} table {% endcomment %}
+<div class="p-3 mb-2 bg-light text-dark text-center background-image: var(--bs-gradient);"><h4>DATA STATE WISE</h4>
+    <input class="form-control mr-sm-2 m-3" id="myinput" type="search" placeholder="Search for regional states.." aria-label="Search" onkeyup="searchfunction()">
+</div>
+   
+
+<div class="container-fluid ">
+<table class="table table-striped .table-hover " id="mytable">
+  <thead>
+    <tr>
+      <th scope="col">S.NO</th>
+      <th scope="col">States</th>
+      <th scope="col">Confirmed Cases</th>
+      <th scope="col">Discharged</th>
+      <th scope="col">Deaths</th>
+      <th scope="col">Total Confirmed</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for c  in states %}
+    <tr>
+      
+      <td>{{forloop.counter}}</td>
+      <td>{{c.loc}}</td>
+      <td>{{c.confirmedCasesIndian}}</td>
+      <td>{{c.discharged}}</td>
+      <td>{{c.deaths}}</td>
+      <td>{{c.totalConfirmed}}</td>
+    
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
+
+<!-- SCRIPT FOR SEARCH FUNCTION  -->
+<script>
+const searchfunction= ()=>{
+    let filter = document.getElementById('myinput').value.toUpperCase();
+    let mytable = document.getElementById('mytable');
+
+    let tr = mytable.getElementsByTagName('tr');
+
+    for(var i=0 ;i<tr.length;i++){
+
+        let td = tr[i].getElementsByTagName('td')[1];
+
+        if (td) {
+            let textvalue = td.textContent || td.innerHTML;
+            if (textvalue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            }else{
+                tr[i].style.display = "none"
+            }
+        }
+    }
+}
+
+</script>
+
+</div>
+
+{% endblock %}
