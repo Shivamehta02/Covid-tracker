@@ -15,3 +15,15 @@ def home(request):
         'states':states
     })
     
+def hospital(request):
+    
+    info = requests.get('https://api.rootnet.in/covid19-in/hospitals/beds')
+    total = info.json()['data']['summary']
+    regional= info.json()['data']['regional']
+    
+    print(total)
+    return render(request,"tracker/hospital.html",{
+        'total':total,
+        'states':regional
+    })
+    
