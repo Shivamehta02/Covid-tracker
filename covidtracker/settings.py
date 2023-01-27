@@ -26,10 +26,12 @@ SECRET_KEY = 'vd2ki-h6*6rsy0kub%^mv1wqb=k*-sm-jsultrp41_v2h$awth'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1',
-                 'covid-tracker-shiva.herokuapp.com',
-                 'covid-tracker-india.azurewebsites.net'
-                 ]
+# ALLOWED_HOSTS = ['127.0.0.1',
+#                  'covid-tracker-shiva.herokuapp.com',
+#                  'covid-tracker-india.azurewebsites.net'
+#                  ]
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,18 +130,19 @@ USE_TZ = True
 
 
 
-STATIC_ROOT = os.path.join(BASE_DIR , "staticfiles")
-# STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR , "staticfiles")  
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR/"static"
 ]
 
-DEFAULT_FILE_STORAGE = 'covidtracker.custom_azure.AzureMediaStorage'
-STATICFILES_STORAGE = 'covidtracker.custom_azure.AzureStaticStorage'
+# DEFAULT_FILE_STORAGE = 'covidtracker.custom_azure.AzureMediaStorage'
+# STATICFILES_STORAGE = 'covidtracker.custom_azure.AzureStaticStorage'yes
 
-STATIC_LOCATION = "static"
 
-AZURE_ACCOUNT_NAME = "covidtrackerindia"
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# STATIC_LOCATION = "static"
+
+# AZURE_ACCOUNT_NAME = "covidtrackerindia"
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
